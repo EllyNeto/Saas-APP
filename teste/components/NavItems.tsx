@@ -11,8 +11,6 @@ const navItems = [
     {label: 'My Journey', href: '/dashjourney'},
 ]
 
-
-
 const NavItems = () => {
     const pathname = usePathname();
   return (
@@ -28,26 +26,5 @@ const NavItems = () => {
     </nav>
   )
 }
-
-// const NavItems = () => {
-//     const pathname = usePathname();    
-//     return (
-//         <nav className="flex items-center gap-4">
-//         {navItems.map(({ label, href }) => (
-//             <Link
-//                 key={label}
-//                 href={href}
-//                 className={`${
-//                     pathname === href
-//                     ? 'text-primary font-semibold'
-//                     : 'text-gray-500'
-//                 }`}
-//                 >
-//                 {label}
-//             </Link>
-//         ))}
-//         </nav>
-//     );
-// };
 
 export default NavItems
