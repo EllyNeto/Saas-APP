@@ -10,39 +10,97 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
+import Image from 'next/image';
+import { getSubjectColor } from '@/lib/utils';
+
+
+
 
 interface CompanionCardProps
 {
-    tittle: string;
+    title: string;
     companions?: Companion[];
     classNames?: string; 
 }
 
-const CompanionList = ({tittle, companions, classNames}: CompanionCardProps) => {
+const CompanionList = ({title, companions, classNames}: CompanionCardProps) => {
   return (
-    <article className="{cn(...inputs: 'companion-list', classNames)}">
-      <h2 className="font-bold text-3xl">Recent Sessions</h2>
+    <article className={cn("companion-list", classNames)}>
+      <h2 className="font-bold text-3xl"> Recent Sessions</h2>
+<div className="border rounded-xl overflow-hidden">
+  <Table>
+    <TableHeader>
+        <TableRow>
+          <TableHead className="text-lg w-2/3">Lessons</TableHead>
+          <TableHead className="text-lg ">Subject</TableHead>
+          <TableHead className="text-lg text-right">Duration</TableHead>
+        </TableRow>
+    </TableHeader>
+      <TableBody>
+          {companions?.map(({id, subject, name, topic, duration}) => (
+          <TableRow key={id}>
+            <TableCell>
+              <Link href={`/companions/${id}`}>
+              <div className="flex items-center gap-2">
+                <div className="size-[72px] 
+                      flex items-center 
+                      justify-center 
+                      rounded-lg 
+                      max-md:hidden" style={{ backgroundColor: getSubjectColor(subject) }}>
+                        <Image 
+                        src={`/icons/${subject.toLowerCase()}.svg`} 
+                        alt={subject}
+                        width={35}
+                        height={35}/>
+                </div>
+              <div className="flex flex-col gap-2">
+                  <p className="font-bold text-2xl">
+                    {name}
+                  </p>
+                  <p className="text-lg">
+                      {topic}
+                  </p>
+              </div>
+              </div>
+              </Link>
+            </TableCell>
+            <TableCell>
+              <div className="subject-badge w-fit max-md:hidden">
+                {subject}
+              </div>
+              <div className="flex items-center justify-center rounded-lg w-fit p-2m md:hidden" 
+                style={{ backgroundColor: getSubjectColor(subject) }}>
+                  <Image
+                    src={`/icons/${subject.toLowerCase()}.svg`}
+                    alt={subject}
+                    width={18}
+                    height={18}/>
+              {topic}
+              </div>
+           </TableCell>
+            <TableCell className="text-right">
+              <div className="flex items-center gap-1 w-full justify-end">
+                <p className="text-2xl">
+                  {duration} {' '}
+                  <span className="max-md:hidden ">
+                     mins 
+                  </span>
+                  </p>
+                  <Image
+                    src="/icons/clock.svg"
+                    alt="minutes"
+                    width={18}
+                    height={18}
+                    className="md:hidden"/>
+              </div>
+            </TableCell>
 
-      <Table>
-  <TableCaption>A list of your recent invoices.</TableCaption>
-  <TableHeader>
-    <TableRow>
-      <TableHead className="w-[100px]">Invoice</TableHead>
-      <TableHead>Status</TableHead>
-      <TableHead>Method</TableHead>
-      <TableHead className="text-right">Amount</TableHead>
-    </TableRow>
-  </TableHeader>
-  <TableBody>
-    <TableRow>
-      <TableCell className="font-medium">INV001</TableCell>
-      <TableCell>Paid</TableCell>
-      <TableCell>Credit Card</TableCell>
-      <TableCell className="text-right">$250.00</TableCell>
-    </TableRow>
-  </TableBody>
-</Table>
-     
+          </TableRow>
+        ))}
+      </TableBody>
+  </Table>
+     </div>
     </article>
   )
 }
