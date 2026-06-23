@@ -16,21 +16,21 @@ const Page = () => {
           topic="Neural Network of the Brain"
           subject="science "
           duration={45}
-          color ="#ff00ff" />
+          color ="#E2D5FF" />
         <CompanionCard
           id="2" 
           name="Countsy the Number Wizard"
           topic="Derivatives & Integrals"
           subject="Maths"
           duration={30}
-          color ="#ffff8f" />        
+          color ="#FFE074" />        
           <CompanionCard
           id="3" 
           name="Verbal the Vocabulary Builder"
           topic="English Literature"
           subject="Language"
           duration={30}
-          color ="#07ffff" />
+          color ="#C2EBFF" />
       </section>
 
       <section className="home-section">
