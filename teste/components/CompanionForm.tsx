@@ -56,9 +56,7 @@ const formSchema = z.object({
    style: z
     .string()
     .min(1, "Style is required."),
-   duration: z
-    .coerce.number()
-    .min(1, "Duration is required."),
+   duration: z.number().min(1, "Duration is required."),
 })
 
 const CompanionForm = () => {
@@ -221,7 +219,8 @@ const CompanionForm = () => {
                 <Input
                 type="number" 
                 placeholder="15" 
-                {...field} 
+                {...field}
+                onChange={(e) => field.onChange(Number(e.target.value))}
                 className="input"/>
               </FormControl>
               <FormMessage />
