@@ -1,20 +1,20 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
 // Define public routes that don't require authentication
-export const isPublicRoute = createRouteMatcher([
+const isPublicRoute = createRouteMatcher([
   "/",
   "/sign-in(.*)",
   "/sign-up(.*)",
 ]);
 
-// In Next.js 16, the middleware filename and named export have been renamed to 'proxy'
-export const middlewareHandler = async (auth: any, request: any) => {
+const middlewareHandler = clerkMiddleware(async (auth, request) => {
   if (!isPublicRoute(request)) {
     await auth.protect();
   }
-};
+});
 
-export const proxy = clerkMiddleware(middlewareHandler);
+export const proxy = middlewareHandler;
+export default middlewareHandler;
 
 export const config = {
   matcher: [

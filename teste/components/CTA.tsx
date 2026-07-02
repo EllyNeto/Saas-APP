@@ -14,7 +14,7 @@ const CTA = () => {
           learning through voice conversations that 
           feel natural and fun</p>
       <Image
-          src="images/cta.svg"
+          src="/images/cta.svg"
           alt="cta"
           width={362}
           height={232}
